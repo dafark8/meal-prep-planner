@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meal Prep Planner</title>
+  <link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-top">
+      <h1 class="app-title">Meal Prep Planner</h1>
+      <button class="btn btn-stop-server" id="btn-stop-server" title="Stop the local server and close the app">⏹ Stop Server</button>
+    </div>
+    <nav class="tab-bar" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" data-tab="planner">Weekly Planner</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="history">History Log</button>
+    </nav>
+  </header>
+
+  <main class="app-main">
+
+    <!-- TAB 1: WEEKLY PLANNER -->
+    <section id="tab-planner" class="tab-panel active" aria-label="Weekly Planner">
+
+      <div class="card" id="evergreen-section">
+        <h2 class="card-title">Evergreen Items</h2>
+        <p class="card-subtitle">Always-on staples — toggle off to exclude from grocery list.</p>
+        <div id="evergreen-list" class="evergreen-list"></div>
+      </div>
+
+      <div class="card" id="menu-section">
+        <h2 class="card-title">This Week's Menu</h2>
+        <div id="dish-slots" class="dish-slots"></div>
+        <button class="btn btn-secondary btn-add-slot" id="btn-add-slot">+ Add Dish Slot</button>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btn-pick-menu">Pick Menu</button>
+        <button class="btn btn-secondary" id="btn-generate-grocery">Generate Grocery List</button>
+        <button class="btn btn-secondary" id="btn-set-menu">Set Menu</button>
+      </div>
+
+      <div id="grocery-panel" class="card grocery-panel hidden" aria-live="polite">
+        <h2 class="card-title">Grocery List</h2>
+        <div id="grocery-list" class="grocery-list"></div>
+      </div>
+
+    </section>
+
+    <!-- TAB 2: HISTORY LOG -->
+    <section id="tab-history" class="tab-panel hidden" aria-label="History Log">
+
+      <div class="card">
+        <h2 class="card-title">Past Menus</h2>
+        <div id="history-list" class="history-list"></div>
+      </div>
+
+      <div class="card data-management-panel">
+        <h2 class="card-title">Data Management</h2>
+        <div class="data-actions">
+          <button class="btn btn-secondary" id="btn-export-history">Export History</button>
+          <label class="btn btn-secondary btn-file-label" for="import-history-input">
+            Import History
+            <input type="file" id="import-history-input" accept=".json" class="visually-hidden" />
+          </label>
+        </div>
+        <p id="import-status" class="import-status" aria-live="polite"></p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div id="toast" class="toast" aria-live="assertive" aria-atomic="true"></div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
