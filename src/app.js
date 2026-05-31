@@ -39,7 +39,7 @@ function showToast(msg, duration = 2800) {
 async function init() {
   try {
     const [recipes, evergreen] = await Promise.all([
-      fetch('recipes.json').then(r => r.json()),
+      fetch('/api/recipes').then(r => r.json()),
       fetch('evergreen.json').then(r => r.json()),
     ]);
     const history = JSON.parse(localStorage.getItem('mealPrepHistory') || '[]');
@@ -105,15 +105,13 @@ function addSlot() {
   });
 }
 
-const CATEGORIES = [
-  { value: 'basic-base',      label: 'Basic Base' },
-  { value: 'pasta',           label: 'Pasta' },
-  { value: 'soups',           label: 'Soups' },
-  { value: 'burgers',         label: 'Burgers' },
-  { value: 'freezer-section', label: 'Freezer Section' },
-  { value: 'entrees',         label: 'Entrees' },
-  { value: 'evergreen',       label: 'Evergreen' },
-];
+function getCategories() {
+  const tags = new Set();
+  state.recipes.forEach(r => {
+    (r.tags || []).forEach(tag => tags.add(tag));
+  });
+  return Array.from(tags).sort().map(tag => ({ value: tag, label: tag }));
+}
 
 function getFilteredRecipes(categoryFilter) {
   if (categoryFilter === 'wild-card') return state.recipes;
@@ -134,7 +132,7 @@ function renderSlots() {
     // Category filter dropdown
     const catOptions = [
       `<option value="wild-card" ${slot.categoryFilter === 'wild-card' ? 'selected' : ''}>Wild Card (any)</option>`,
-      ...CATEGORIES.map(cat =>
+      ...getCategories().map(cat =>
         `<option value="${cat.value}" ${slot.categoryFilter === cat.value ? 'selected' : ''}>${cat.label}</option>`
       ),
     ].join('');
