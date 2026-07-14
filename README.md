@@ -1,3 +1,5 @@
+<img width="1099" height="923" alt="Screenshot 2026-05-31 at 3 34 37 PM" src="https://github.com/user-attachments/assets/cbb52639-314e-4213-af80-7afae88ecff6" />
+
 # Meal Prep Planner
 
 A local web app for planning weekly meals, generating grocery lists, and tracking meal history. Runs entirely on your machine — no accounts, no cloud.
